@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BNCC Computação sem Computadores - Guia Prático</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: #1a1a2e;
+      background: #f8f9fc;
+      line-height: 1.6;
+    }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      color: #fff;
+      padding: 60px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: #f8f9fc;
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .hero .container { position: relative; z-index: 1; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 100px;
+      padding: 6px 18px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+      color: #a78bfa;
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+    .hero h1 span { color: #a78bfa; }
+    .hero p {
+      font-size: 1.1rem;
+      color: #c4b5fd;
+      margin-bottom: 30px;
+      max-width: 500px;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #7c3aed, #a78bfa);
+      color: #fff;
+      text-decoration: none;
+      padding: 16px 40px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 8px 30px rgba(124,58,237,0.35);
+    }
+    .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(124,58,237,0.5); }
+    .hero-image {
+      text-align: center;
+    }
+    .hero-image img {
+      max-width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    /* Seções */
+    section { padding: 70px 0; }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      text-align: center;
+      color: #6b7280;
+      max-width: 600px;
+      margin: 0 auto 50px;
+      font-size: 1.05rem;
+    }
+
+    /* Autor */
+    .autor-section {
+      background: #fff;
+    }
+    .autor-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 30px;
+      align-items: center;
+      max-width: 750px;
+      margin: 0 auto;
+      background: #f3f0ff;
+      border-radius: 20px;
+      padding: 40px;
+    }
+    .autor-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #7c3aed;
+    }
+    .autor-card h3 { font-size: 1.3rem; }
+    .autor-card .creds { color: #6b7280; font-size: 0.95rem; margin-top: 6px; }
+
+    /* O que vem */
+    .incluso-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .incluso-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform .2s;
+    }
+    .incluso-card:hover { transform: translateY(-4px); }
+    .incluso-icon {
+      width: 56px;
+      height: 56px;
+      background: #ede9fe;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 1.5rem;
+    }
+    .incluso-card h4 { font-size: 1.1rem; margin-bottom: 8px; }
+    .incluso-card p { color: #6b7280; font-size: 0.9rem; }
+
+    /* Preview */
+    .preview-section { background: #fff; }
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .preview-grid img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform .3s;
+    }
+    .preview-grid img:hover { transform: scale(1.03); }
+
+    /* Diferenciais */
+    .diffs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .diff-item {
+      display: flex;
+      gap: 14px;
+      background: #fff;
+      padding: 20px 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+    .diff-check {
+      font-size: 1.3rem;
+      color: #7c3aed;
+      flex-shrink: 0;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      color: #fff;
+      text-align: center;
+      padding: 80px 0;
+    }
+    .cta-section h2 { font-size: 2.2rem; font-weight: 800; }
+    .cta-section p { color: #c4b5fd; margin: 10px 0 30px; font-size: 1.1rem; }
+    .cta-big {
+      display: inline-block;
+      background: linear-gradient(135deg, #7c3aed, #a78bfa);
+      color: #fff;
+      text-decoration: none;
+      padding: 18px 50px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      box-shadow: 0 8px 30px rgba(124,58,237,0.35);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .cta-big:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(124,58,237,0.5); }
+    .cta-small {
+      display: inline-block;
+      margin-top: 14px;
+      color: #a78bfa;
+      font-size: 0.9rem;
+    }
+
+    /* Afiliado */
+    .afiliado-section { background: #fff; text-align: center; }
+    .afiliado-card {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fef9c3;
+      border: 2px dashed #eab308;
+      border-radius: 16px;
+      padding: 32px;
+    }
+    .afiliado-card h4 { font-size: 1.2rem; color: #854d0e; }
+    .afiliado-card p { color: #713f12; margin: 8px 0 20px; }
+    .afiliado-btn {
+      display: inline-block;
+      background: #eab308;
+      color: #422006;
+      padding: 12px 32px;
+      border-radius: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .afiliado-btn:hover { background: #d97706; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      color: #9ca3af;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+      .hero h1 { font-size: 1.8rem; }
+      .hero-image img { max-width: 80%; }
+      .incluso-grid, .preview-grid { grid-template-columns: 1fr; }
+      .diffs-grid { grid-template-columns: 1fr; }
+      .autor-card { grid-template-columns: 1fr; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">📚 Lançamento</div>
+        <h1>BNCC <span>Computação sem Computadores</span></h1>
+        <p>Guia Prático de Computação Desplugada para Educação Infantil e Ensino Fundamental — alinhado à BNCC.</p>
+        <a class="hero-cta" href="https://pay.kiwify.com.br/pXbF6FQ" target="_blank">
+          🔥 QUERO GARANTIR O MEU
+        </a>
+      </div>
+      <div class="hero-image">
+        <img src="images/mockup.png" alt="Mockup do ebook">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTOR -->
+<section class="autor-section">
+  <div class="container">
+    <h2 class="section-title">Quem escreveu este guia</h2>
+    <p class="section-sub">Conteúdo criado por quem entende de sala de aula e de tecnologia.</p>
+    <div class="autor-card">
+      <img src="images/autor.png" alt="Elizeu Barbosa Abreu">
+      <div>
+        <h3>Elizeu Barbosa Abreu</h3>
+        <div class="creds">
+          Licenciado em Ciências Biológicas<br>
+          Licenciado em Computação<br>
+          Pós-graduado em Desenvolvimento de Sistemas com Python
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE VEM -->
+<section>
+  <div class="container">
+    <h2 class="section-title">O que você vai levar</h2>
+    <p class="section-sub">Tudo que precisa para ensinar Computação sem precisar de laboratório de informática.</p>
+    <div class="incluso-grid">
+      <div class="incluso-card">
+        <div class="incluso-icon">📘</div>
+        <h4>E-book Completo</h4>
+        <p>PDF do guia <em>BNCC Computação sem Computadores</em> com 20 planos de aula prontos.</p>
+      </div>
+      <div class="incluso-card">
+        <div class="incluso-icon">🎯</div>
+        <h4>100 Atividades para Imprimir</h4>
+        <p>Pasta no Drive com atividades prontas, manual do professor e código BNCC em cada uma.</p>
+      </div>
+      <div class="incluso-card">
+        <div class="incluso-icon">🧩</div>
+        <h4>Computação Desplugada</h4>
+        <p>Ideias práticas sem uso de computadores — ideal para qualquer realidade escolar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREVIEW -->
+<section class="preview-section">
+  <div class="container">
+    <h2 class="section-title">Veja como é</h2>
+    <p class="section-sub">Exemplos reais do material que você vai receber.</p>
+    <div class="preview-grid">
+      <img src="images/000.png" alt="Exemplo 1 - Manual do Professor">
+      <img src="images/001.png" alt="Exemplo 2 - Atividade do Aluno">
+      <img src="images/capaBNCC.png" alt="Capa do ebook">
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Por que este material é diferente</h2>
+    <p class="section-sub">Não é só um e-book — é um kit pronto para o professor aplicar amanhã.</p>
+    <div class="diffs-grid">
+      <div class="diff-item">
+        <div class="diff-check">✅</div>
+        <div><strong>Alinhado à BNCC</strong><br>Cada atividade traz o código BNCC correspondente.</div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-check">✅</div>
+        <div><strong>Sem computador</strong><br>Atividades desplugadas que funcionam em qualquer escola.</div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-check">✅</div>
+        <div><strong>Pronto para usar</strong><br>20 planos de aula + 100 atividades para imprimir.</div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-check">✅</div>
+        <div><strong>Manual do Professor</strong><br>Orientações detalhadas de como aplicar cada atividade.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Comece hoje a ensinar Computação</h2>
+    <p>Material digital — acesso imediato após a confirmação.</p>
+    <a class="cta-big" href="https://pay.kiwify.com.br/pXbF6FQ" target="_blank">🚀 QUERO COMPRAR AGORA</a>
+    <br>
+    <small class="cta-small">Pagamento 100% seguro via Kiwify · Acesso vitalício</small>
+  </div>
+</section>
+
+<!-- AFILIADO -->
+<section class="afiliado-section">
+  <div class="container">
+    <h2 class="section-title">É criador de conteúdo?</h2>
+    <p class="section-sub">Divulgue e ganhe 30% de comissão por venda.</p>
+    <div class="afiliado-card">
+      <h4>💰 Programa de Afiliados</h4>
+      <p>Ganhe <strong>30%</strong> de comissão em cada venda realizada através do seu link.</p>
+      <a class="afiliado-btn" href="https://dashboard.kiwify.com/join/affiliate/KybrgagB" target="_blank">
+        🔗 Quero ser afiliado
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    BNCC Computação sem Computadores &copy; 2025 &mdash; Elizeu Barbosa Abreu
+  </div>
+</footer>
+
+</body>
+</html>
